@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block specifika %}
+    <div class="container">
+        <div class="row well">
+            <h3>Seznam novih sporocil:</h3>
+            {% if seznam %}
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Posiljatelj</th>
+                        <th>Prejemnik</th>
+                        <th>Sporocilo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for sporocilo in seznam %}
+                            <tr>
+                                <td>{{ sporocilo.posiljatelj }}</td>
+                                <td>{{ sporocilo.prejemnik }}</td>
+                                <td>{{ sporocilo.sporocilo[0:20] + "..." }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Ni novih sporocil</p>
+            {% endif %}
+        </div>
+        <div class="row well">
+        <h3>Seznam prebranih sporocil:</h3>
+        {% if seznam %}
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Posiljatelj</th>
+                    <th>Prejemnik</th>
+                    <th>Sporocilo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for sporocilo in seznam %}
+                        <tr>
+                            <td>{{ sporocilo.posiljatelj }}</td>
+                            <td>{{ sporocilo.prejemnik }}</td>
+                            <td>{{ sporocilo.sporocilo[0:20] + "..." }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Ni starih sporocil</p>
+        {% endif %}
+        </div>
+    </div>
+{% endblock specifika %}

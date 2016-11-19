@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block specifika %}
+    <div class="container">
+        {% if logiran %}
+            <div>
+                <h1>Pozdravljeni {{ user_nickname }}, v Tmail aplikaciji!</h1>
+                <a class="btn btn-default" href="/poslji_sporocilo/">Poslji sporocilo</a>
+                <a class="btn btn-default" href="/prejeta_sporocila/">Prejeta sporocila</a>
+                <a class="btn btn-default" href="/poslana_sporocila/">Poslana sporocila</a>
+                <a class="btn btn-default" href="{{ logout_url }}">Odjava</a>
+            </div>
+        {% else %}
+            <div>
+                <h1>Pozdravljeni v Tmail aplikaciji!</h1>
+                <h3>Prijavite se z Google racunom!</h3>
+                <a class="btn btn-default" href="{{ login_url }}">Prijava</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock specifika %}
