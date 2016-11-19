@@ -80,9 +80,20 @@ class PrejetaSporocilaHandler(BaseHandler):
         seznam = PosameznoSporocilo.query(PosameznoSporocilo.prejemnik == user_email).fetch()
 
         if user:
-
             params = {"seznam": seznam}
             return self.render_template("prejeta_sporocila.html", params=params)
+        else:
+            self.redirect_to("home")
+
+class PoslanaSporocilaHandler(BaseHandler):
+    def get(self):
+        user = users.get_current_user()
+        user_email = user.email()
+        seznam = PosameznoSporocilo.query(PosameznoSporocilo.posiljatelj == user_email).fetch()
+
+        if user:
+            params = {"seznam": seznam}
+            return self.render_template("poslana_sporocila.html", params=params)
         else:
             self.redirect_to("home")
 
@@ -91,4 +102,5 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler, name="home"),
     webapp2.Route('/poslji_sporocilo/', PosljiSporociloHandler),
     webapp2.Route('/prejeta_sporocila/', PrejetaSporocilaHandler),
+    webapp2.Route('/poslana_sporocila/', PoslanaSporocilaHandler),
 ], debug=True)

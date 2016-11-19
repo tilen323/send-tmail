@@ -2,6 +2,30 @@
 
 {% block specifika %}
     <div class="container">
-
+        <div class="row well">
+            <h3>Seznam poslanih sporocil:</h3>
+            {% if seznam %}
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Posiljatelj</th>
+                        <th>Prejemnik</th>
+                        <th>Sporocilo</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for sporocilo in seznam %}
+                            <tr>
+                                <td>{{ sporocilo.posiljatelj }}</td>
+                                <td>{{ sporocilo.prejemnik }}</td>
+                                <td>{{ sporocilo.sporocilo[0:15] + "..." }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Ni poslanih sporocil</p>
+            {% endif %}
+        </div>
     </div>
 {% endblock specifika %}
