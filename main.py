@@ -66,8 +66,9 @@ class PosljiSporociloHandler(BaseHandler):
         posiljatelj = self.request.get("posiljatelj")
         prejemnik = self.request.get("prejemnik")
         sporocilo = self.request.get("sporocilo")
+        datum = strftime("%d.%b.%Y, %H:%M:%S", gmtime())
 
-        posamezno_sporocilo = PosameznoSporocilo(posiljatelj=posiljatelj, prejemnik=prejemnik, sporocilo=sporocilo)
+        posamezno_sporocilo = PosameznoSporocilo(posiljatelj=posiljatelj, prejemnik=prejemnik, sporocilo=sporocilo, datum=datum)
         posamezno_sporocilo.put()
 
         params = {"user_email": user_email, "sporocilo": sporocilo}
@@ -97,10 +98,49 @@ class PoslanaSporocilaHandler(BaseHandler):
         else:
             self.redirect_to("home")
 
+class PosameznoSporociloHandler(BaseHandler):
+    def get(self, sporocilo_id):
+        sporocilo = PosameznoSporocilo.get_by_id(int(sporocilo_id))
+        user = users.get_current_user()
+
+        params = {"sporocilo": sporocilo, "user": user}
+        return self.render_template("posamezno_sporocilo.html", params=params)
+
+class OdgovoriHandler(BaseHandler):
+    def get(self, sporocilo_id):
+        sporocilo = PosameznoSporocilo.get_by_id(int(sporocilo_id))
+
+        params = {"sporocilo": sporocilo}
+        return self.render_template("odgovori.html", params=params)
+
+class UrediHandler(BaseHandler):
+    def get(self, sporocilo_id):
+        sporocilo = PosameznoSporocilo.get_by_id(int(sporocilo_id))
+
+        params = {"sporocilo": sporocilo}
+        return self.render_template("uredi.html", params=params)
+
+    def post(self, sporocilo_id):
+        posiljatelj = self.request.get("posiljatelj")
+        prejemnik = self.request.get("prejemnik")
+        sporocilo = self.request.get("sporocilo")
+        datum = strftime("%d.%b.%Y, %H:%M:%S", gmtime())
+
+        posamezno_sporocilo = PosameznoSporocilo.get_by_id(int(sporocilo_id))
+        posamezno_sporocilo.posiljatelj = posiljatelj
+        posamezno_sporocilo.prejemnik = prejemnik
+        posamezno_sporocilo.sporocilo = sporocilo
+        posamezno_sporocilo.datum = datum
+        posamezno_sporocilo.put()
+        self.redirect_to("poslana")
+
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler, name="home"),
     webapp2.Route('/poslji_sporocilo/', PosljiSporociloHandler),
     webapp2.Route('/prejeta_sporocila/', PrejetaSporocilaHandler),
-    webapp2.Route('/poslana_sporocila/', PoslanaSporocilaHandler),
+    webapp2.Route('/poslana_sporocila/', PoslanaSporocilaHandler, name="poslana"),
+    webapp2.Route('/sporocilo/<sporocilo_id:\d+>/', PosameznoSporociloHandler),
+    webapp2.Route('/odgovori/<sporocilo_id:\d+>/', OdgovoriHandler),
+    webapp2.Route('/uredi/<sporocilo_id:\d+>/', UrediHandler),
 ], debug=True)

@@ -2,7 +2,7 @@
 
 {% block specifika %}
     <div class="container">
-        <div class="row well">
+        <div class="row">
             <h3>Seznam prejetih sporocil:</h3>
             {% if seznam %}
                 <table class="table">
@@ -11,6 +11,7 @@
                         <th>Posiljatelj</th>
                         <th>Prejemnik</th>
                         <th>Sporocilo</th>
+                        <th>Cas objave</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -18,7 +19,8 @@
                             <tr>
                                 <td>{{ sporocilo.posiljatelj }}</td>
                                 <td>{{ sporocilo.prejemnik }}</td>
-                                <td>{{ sporocilo.sporocilo[0:15] + "..." }}</td>
+                                <td><a href="/sporocilo/{{ sporocilo.key.id() }}/">{{ sporocilo.sporocilo[0:15] + "..." }}</a></td>
+                                <td>{{ sporocilo.datum }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

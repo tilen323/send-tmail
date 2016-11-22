@@ -8,14 +8,14 @@
                 <div class="form-group">
                     <label class="control-label col-sm-2">Posiljatelj:</label>
                     <div class="col-sm-10">
-                        <input name="posiljatelj" class="form-control" value="{{ user_email }}">
+                        <input name="posiljatelj" class="form-control" value="{{ sporocilo.posiljatelj }}">
                     </div>
                 </div>
 
             <div class="form-group">
                 <label class="control-label col-sm-2">Prejemnik:</label>
                 <div class="col-sm-10">
-                    <input name="prejemnik" class="form-control" required="required" placeholder="Vpisi email prejemnika.. (obvezno)">
+                    <input name="prejemnik" class="form-control" value="{{ sporocilo.prejemnik }}">
                 </div>
             </div>
             <div class="form-group">
@@ -30,15 +30,8 @@
                 </div>
             </div>
         </form>
-        {% if sporocilo %}
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="alert alert-success">
-                    <span class="glyphicon glyphicon-ok"></span><strong> Uspesno!</strong> Sporocilo je bilo uspesno poslano.
-                </div>
-            </div>
-        {% endif %}
         <div class="col-sm-offset-2 col-sm-10">
-            <a onclick="goBack()" class="btn btn-default"><span class="glyphicon glyphicon-step-backward"></span>Nazaj</a>
+            <a onclick="goBack()" class="btn btn-default"><span class="glyphicon glyphicon-step-backward"></span> Nazaj</a>
         </div>
         <script>
         function goBack() {

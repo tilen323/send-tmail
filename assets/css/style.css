@@ -1,3 +1,28 @@
-body {
+* {
+    margin: 0;
+    padding: 0;
+}
 
+#home-slika {
+    margin: 20 0;
+}
+
+.gumb1 {
+    height: 130px;
+    margin-top: 25;
+    border-left: 1px solid #007FCC;
+    border-right: 1px solid #007FCC;
+    text-align: center;
+    font-size: 25;
+    letter-spacing: 1px;
+    transition: all .1s ease-in;
+}
+
+.gumb1:hover {
+    text-decoration: none;
+    letter-spacing: 0.2em;
+}
+
+.pozdrav {
+    text-align: center;
 }

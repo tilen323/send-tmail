@@ -3,18 +3,18 @@
 {% block specifika %}
     <div class="container">
         {% if logiran %}
-            <div>
+            <div class="pozdrav">
                 <h1>Dobrodosel {{ user_nickname }}!</h1>
-                <a class="btn btn-default" href="/poslji_sporocilo/">Poslji sporocilo</a>
-                <a class="btn btn-default" href="/prejeta_sporocila/">Prejeta sporocila</a>
-                <a class="btn btn-default" href="/poslana_sporocila/">Poslana sporocila</a>
-                <a class="btn btn-default" href="{{ logout_url }}">Odjava</a>
+                <a class="col-sm-3 gumb1" href="/poslji_sporocilo/">Poslji<br>Sporocilo<br><span class="glyphicon glyphicon-share"></span></a>
+                <a class="col-sm-3 gumb1" href="/prejeta_sporocila/">Prejeta<br>Sporocila<br><span class="glyphicon glyphicon-import"></span></a>
+                <a class="col-sm-3 gumb1" href="/poslana_sporocila/">Poslana<br>Sporocila<br><span class="glyphicon glyphicon-export"></span></a>
+                <a class="col-sm-3 gumb1" href="{{ logout_url }}"><br>Odjava<br><span class="glyphicon glyphicon-log-out"></span></a>
             </div>
         {% else %}
-            <div>
+            <div class="pozdrav">
                 <h1>Pozdravljeni v Tmail aplikaciji!</h1>
                 <h3>Prijavite se z Google racunom!</h3>
-                <a class="btn btn-default" href="{{ login_url }}">Prijava</a>
+                <a class="col-sm-offset-4 col-sm-4 gumb1" href="{{ login_url }}"><br>Prijava<br><span class="glyphicon glyphicon-log-in"></span></a>
             </div>
         {% endif %}
     </div>
