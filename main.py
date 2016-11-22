@@ -63,12 +63,11 @@ class PosljiSporociloHandler(BaseHandler):
     def post(self):
         user = users.get_current_user()
         user_email = user.email()
-        posiljatelj = self.request.get("posiljatelj")
         prejemnik = self.request.get("prejemnik")
         sporocilo = self.request.get("sporocilo")
         datum = strftime("%d.%b.%Y, %H:%M:%S", gmtime())
 
-        posamezno_sporocilo = PosameznoSporocilo(posiljatelj=posiljatelj, prejemnik=prejemnik, sporocilo=sporocilo, datum=datum)
+        posamezno_sporocilo = PosameznoSporocilo(posiljatelj=user_email, prejemnik=prejemnik, sporocilo=sporocilo, datum=datum)
         posamezno_sporocilo.put()
 
         params = {"user_email": user_email, "sporocilo": sporocilo}
