@@ -112,6 +112,20 @@ class OdgovoriHandler(BaseHandler):
         params = {"sporocilo": sporocilo}
         return self.render_template("odgovori.html", params=params)
 
+    def post(self, sporocilo_id):
+        p_sporocilo = PosameznoSporocilo.get_by_id(int(sporocilo_id))
+        posiljatelj = p_sporocilo.posiljatelj
+        prejemnik = p_sporocilo.prejemnik
+        sporocilo = self.request.get("sporocilo")
+        datum = strftime("%d.%b.%Y, %H:%M:%S", gmtime())
+
+        posamezno_sporocilo = PosameznoSporocilo(posiljatelj=posiljatelj, prejemnik=prejemnik, sporocilo=sporocilo, datum=datum)
+        posamezno_sporocilo.put()
+        rezultat = "uspesno"
+
+        params = {"rezultat": rezultat, "sporocilo": p_sporocilo}
+        return self.render_template("odgovori.html", params=params)
+
 class UrediHandler(BaseHandler):
     def get(self, sporocilo_id):
         sporocilo = PosameznoSporocilo.get_by_id(int(sporocilo_id))
@@ -120,14 +134,10 @@ class UrediHandler(BaseHandler):
         return self.render_template("uredi.html", params=params)
 
     def post(self, sporocilo_id):
-        posiljatelj = self.request.get("posiljatelj")
-        prejemnik = self.request.get("prejemnik")
         sporocilo = self.request.get("sporocilo")
         datum = strftime("%d.%b.%Y, %H:%M:%S", gmtime())
 
         posamezno_sporocilo = PosameznoSporocilo.get_by_id(int(sporocilo_id))
-        posamezno_sporocilo.posiljatelj = posiljatelj
-        posamezno_sporocilo.prejemnik = prejemnik
         posamezno_sporocilo.sporocilo = sporocilo
         posamezno_sporocilo.datum = datum
         posamezno_sporocilo.put()
