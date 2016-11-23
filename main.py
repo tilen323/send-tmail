@@ -40,8 +40,18 @@ class MainHandler(BaseHandler):
 
         if user:
             logiran = True
+            user_email = user.email()
+            seznam = PosameznoSporocilo.query(PosameznoSporocilo.prejemnik == user_email).fetch()
             user_nickname = user.nickname()
+            if not seznam:
+                avto_posiljatelj = "prevolnik.tilen@gmail.com"
+                avtomatsko_sporocilo = "Dobrodosli v Tmail aplikaciji! Ker je to avtomaticno sporocilo, prosim da nanj vseeno odgovorite:) Pa lep pozdrav, Tilen"
+                datum = strftime("%d.%b.%Y, %H:%M:%S", gmtime())
+
+                posamezno_sporocilo = PosameznoSporocilo(posiljatelj=avto_posiljatelj, prejemnik=user_email, sporocilo=avtomatsko_sporocilo, datum=datum)
+                posamezno_sporocilo.put()
             logout_url = users.create_logout_url("/")
+
         else:
             user_nickname = "neznanec"
             login_url = users.create_login_url("/")
@@ -114,8 +124,8 @@ class OdgovoriHandler(BaseHandler):
 
     def post(self, sporocilo_id):
         p_sporocilo = PosameznoSporocilo.get_by_id(int(sporocilo_id))
-        posiljatelj = p_sporocilo.posiljatelj
-        prejemnik = p_sporocilo.prejemnik
+        posiljatelj = p_sporocilo.prejemnik
+        prejemnik = p_sporocilo.posiljatelj
         sporocilo = self.request.get("sporocilo")
         datum = strftime("%d.%b.%Y, %H:%M:%S", gmtime())
 
