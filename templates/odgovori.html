@@ -3,12 +3,13 @@
 {% block specifika %}
     <div class="container">
         <h3 class="col-sm-offset-2 col-sm-10" style="margin-bottom: 20;">Odgovori na sporocilo:</h3>
-        <div class="col-sm-offset-2 col-sm-10 well">
-            <p>{{ sporocilo.sporocilo }}</p>
+        <div class="col-sm-offset-2 col-sm-10 panel panel-default">
+            <div class="panel-heading">Posiljatelj: {{ sporocilo.posiljatelj }}</div>
+            <div class="panel-body"> - {{ sporocilo.sporocilo }}</div>
         </div>
         <form method="post" action="/odgovori/{{ sporocilo.key.id() }}/" class="form-horizontal form-poslji">
             <div class="form-group">
-                <label class="control-label col-sm-2">Sporocilo:</label>
+                <label class="control-label col-sm-2">Odgovor:</label>
                 <div class="col-sm-10">
                     <textarea rows="3" class="form-control" name="sporocilo" required="required" placeholder="Vpisi sporocilo.. (obvezno)"></textarea>
                 </div>
