@@ -50,13 +50,21 @@ class MainHandler(BaseHandler):
 
                 posamezno_sporocilo = PosameznoSporocilo(posiljatelj=avto_posiljatelj, prejemnik=user_email, sporocilo=avtomatsko_sporocilo, datum=datum)
                 posamezno_sporocilo.put()
+
+            seznam_prejetih = PosameznoSporocilo.query(PosameznoSporocilo.prejemnik == user_email).fetch()
+            seznam_poslanih = PosameznoSporocilo.query(PosameznoSporocilo.posiljatelj == user_email).fetch()
+            st_prejetih = len(seznam_prejetih)
+            st_poslanih = len(seznam_poslanih)
+
             logout_url = users.create_logout_url("/")
 
         else:
             user_nickname = "neznanec"
             login_url = users.create_login_url("/")
+            st_prejetih = ""
+            st_poslanih = ""
 
-        params = {"logiran": logiran, "login_url": login_url, "logout_url": logout_url, "user_nickname": user_nickname}
+        params = {"logiran": logiran, "login_url": login_url, "logout_url": logout_url, "user_nickname": user_nickname, "st_prejetih": st_prejetih, "st_poslanih": st_poslanih}
         return self.render_template("hello.html", params=params)
 
 

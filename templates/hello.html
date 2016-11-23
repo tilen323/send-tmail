@@ -6,8 +6,8 @@
             <div class="pozdrav">
                 <h1>Dobrodosel {{ user_nickname }}!</h1>
                 <a class="col-sm-3 gumb1" href="/poslji_sporocilo/">Poslji<br>Sporocilo<br><span class="glyphicon glyphicon-share"></span></a>
-                <a class="col-sm-3 gumb1" href="/prejeta_sporocila/">Prejeta<br>Sporocila<br><span class="glyphicon glyphicon-import"></span></a>
-                <a class="col-sm-3 gumb1" href="/poslana_sporocila/">Poslana<br>Sporocila<br><span class="glyphicon glyphicon-export"></span></a>
+                <a class="col-sm-3 gumb1" href="/prejeta_sporocila/"><span class="badge" style="font-size: 18;">{{ st_prejetih }}</span> Prejeta<br>Sporocila<br><span class="glyphicon glyphicon-import"></span></a>
+                <a class="col-sm-3 gumb1" href="/poslana_sporocila/"><span class="badge" style="font-size: 18;">{{ st_poslanih }}</span> Poslana<br>Sporocila<br><span class="glyphicon glyphicon-export"></span></a>
                 <a class="col-sm-3 gumb1" href="{{ logout_url }}"><br>Odjava<br><span class="glyphicon glyphicon-log-out"></span></a>
             </div>
         {% else %}
