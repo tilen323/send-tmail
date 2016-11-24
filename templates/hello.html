@@ -4,11 +4,14 @@
     <div class="container">
         {% if logiran %}
             <div class="pozdrav">
-                <h1>Dobrodosel {{ user_nickname }}!</h1>
-                <a class="col-sm-3 gumb1" href="/poslji_sporocilo/">Poslji<br>Sporocilo<br><span class="glyphicon glyphicon-share"></span></a>
-                <a class="col-sm-3 gumb1" href="/prejeta_sporocila/"><span class="badge" style="font-size: 18;">{{ st_prejetih }}</span> Prejeta<br>Sporocila<br><span class="glyphicon glyphicon-import"></span></a>
-                <a class="col-sm-3 gumb1" href="/poslana_sporocila/"><span class="badge" style="font-size: 18;">{{ st_poslanih }}</span> Poslana<br>Sporocila<br><span class="glyphicon glyphicon-export"></span></a>
-                <a class="col-sm-3 gumb1" href="{{ logout_url }}"><br>Odjava<br><span class="glyphicon glyphicon-log-out"></span></a>
+                <div class="panel panel-default">
+                    <div class="panel-body"><h1>Dobrodosli {{ user_nickname }}!</h1></div>
+                </div>
+                <a class="col-sm-4 gumb1" href="/poslji_sporocilo/">Poslji<br>Sporocilo<br><span class="glyphicon glyphicon-share"></span></a>
+                <a class="col-sm-4 gumb1" href="/prejeta_sporocila/"><span class="badge" style="font-size: 18;">{{ st_prejetih }}</span> Prejeta<br>Sporocila<br><span class="glyphicon glyphicon-import"></span></a>
+                <a class="col-sm-4 gumb1" href="/poslana_sporocila/"><span class="badge" style="font-size: 18;">{{ st_poslanih }}</span> Poslana<br>Sporocila<br><span class="glyphicon glyphicon-export"></span></a>
+                <a class="col-sm-offset-2 col-sm-4 gumb1" href="/vreme/"><br>Vreme<br><span class="glyphicon glyphicon-cloud"></span></a>
+                <a class="col-sm-4 gumb1" href="{{ logout_url }}"><br>Odjava<br><span class="glyphicon glyphicon-log-out"></span></a>
             </div>
         {% else %}
             <div class="pozdrav">

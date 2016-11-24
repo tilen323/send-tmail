@@ -5,6 +5,8 @@ import webapp2
 from time import gmtime, strftime
 from models import *
 from google.appengine.api import users
+from google.appengine.api import urlfetch
+import json
 
 
 template_dir = os.path.join(os.path.dirname(__file__), "templates")
@@ -159,8 +161,29 @@ class UrediHandler(BaseHandler):
         posamezno_sporocilo.sporocilo = sporocilo
         posamezno_sporocilo.datum = datum
         posamezno_sporocilo.put()
-        self.redirect_to("poslana")
 
+        p_sporocilo = PosameznoSporocilo.get_by_id(int(sporocilo_id))
+        rezultat = "uspesno"
+        params = {"sporocilo": p_sporocilo, "rezultat": rezultat}
+        return self.render_template("uredi.html", params=params)
+
+class VremeHandler(BaseHandler):
+    def get(self):
+        url_lj = "http://api.openweathermap.org/data/2.5/weather?q=Ljubljana&units=metric&appid=475df065e7f7f6d0adabdc10ef4f2637"
+        result_lj = urlfetch.fetch(url_lj)
+        vreme_lj = json.loads(result_lj.content)
+
+        url_ce = "http://api.openweathermap.org/data/2.5/weather?q=Celje&units=metric&appid=475df065e7f7f6d0adabdc10ef4f2637"
+        result_ce = urlfetch.fetch(url_ce)
+        vreme_ce = json.loads(result_ce.content)
+
+        url_mb = "http://api.openweathermap.org/data/2.5/weather?q=Maribor&units=metric&appid=475df065e7f7f6d0adabdc10ef4f2637"
+        result_mb = urlfetch.fetch(url_mb)
+        vreme_mb = json.loads(result_mb.content)
+
+
+        params = {"vreme_lj": vreme_lj, "vreme_ce": vreme_ce, "vreme_mb": vreme_mb}
+        return self.render_template("vreme.html", params=params)
 
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler, name="home"),
@@ -170,4 +193,5 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/sporocilo/<sporocilo_id:\d+>/', PosameznoSporociloHandler),
     webapp2.Route('/odgovori/<sporocilo_id:\d+>/', OdgovoriHandler),
     webapp2.Route('/uredi/<sporocilo_id:\d+>/', UrediHandler),
+    webapp2.Route('/vreme/', VremeHandler),
 ], debug=True)

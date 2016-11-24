@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block specifika %}
+    <div class="container">
+        <h3>Vreme:</h3>
+        <a href="/" class="btn btn-primary" style="float: right; margin-top: -40;">Domov</a>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-weight: bold;">Ljubljana:</div>
+                <div class="panel-body">
+                    <p style="text-transform: capitalize;">Vreme: {{ vreme_lj.weather[0].description }}</p>
+                    <p>Trenutna temperatura: {{ vreme_lj.main.temp }} &#x2103;</p>
+                    <p>Najnizja temperatura: {{ vreme_lj.main.temp_min }} &#x2103;</p>
+                    <p>Najvisja temperatura: {{ vreme_lj.main.temp_max }} &#x2103;</p>
+                    <p>Vlaga: {{ vreme_lj.main.humidity }} %</p>
+                    <p>Veter: {{ vreme_lj.wind.speed }} km/h</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-weight: bold;">Maribor:</div>
+                <div class="panel-body">
+                    <p style="text-transform: capitalize;">Vreme: {{ vreme_mb.weather[0].description }}</p>
+                    <p>Trenutna temperatura: {{ vreme_mb.main.temp }} &#x2103;</p>
+                    <p>Najnizja temperatura: {{ vreme_mb.main.temp_min }} &#x2103;</p>
+                    <p>Najvisja temperatura: {{ vreme_mb.main.temp_max }} &#x2103;</p>
+                    <p>Vlaga: {{ vreme_mb.main.humidity }} %</p>
+                    <p>Veter: {{ vreme_mb.wind.speed }} km/h</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="font-weight: bold;">Celje:</div>
+                <div class="panel-body">
+                    <p style="text-transform: capitalize;">Vreme: {{ vreme_ce.weather[0].description }}</p>
+                    <p>Trenutna temperatura: {{ vreme_ce.main.temp }} &#x2103;</p>
+                    <p>Najnizja temperatura: {{ vreme_ce.main.temp_min }} &#x2103;</p>
+                    <p>Najvisja temperatura: {{ vreme_ce.main.temp_max }} &#x2103;</p>
+                    <p>Vlaga: {{ vreme_ce.main.humidity }} %</p>
+                    <p>Veter: {{ vreme_ce.wind.speed }} km/h</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <a href="http://www.arso.gov.si/vreme/napovedi%20in%20podatki/radar_anim.gif">
+                <img class="img-responsive" src="http://www.arso.gov.si/vreme/napovedi%20in%20podatki/radar_anim.gif">
+            </a>
+        </div>
+        <div class="col-sm-6">
+            <a href="http://www.arso.gov.si/vreme/napovedi%20in%20podatki/satelit-ir.jpg">
+                <img class="img-responsive" src="http://www.arso.gov.si/vreme/napovedi%20in%20podatki/satelit-ir.jpg">
+            </a>
+        </div>
+    </div>
+    <div style="height: 50;"></div>
+{% endblock specifika %}

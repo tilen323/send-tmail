@@ -2,14 +2,17 @@
 
 {% block specifika %}
     <div class="container">
-        <h3>Podatki o sporocilu:</h3>
-
-         <ul class="list-group">
-             <li class="list-group-item">Posiljatelj: {{ sporocilo.posiljatelj }}</li>
-             <li class="list-group-item">Prejemnik: {{ sporocilo.prejemnik }}</li>
-             <li class="list-group-item">Datum in cas objave: {{ sporocilo.datum }}</li>
-             <li class="list-group-item">Sporocilo: {{ sporocilo.sporocilo }}</li>
-        </ul>
+        <h3>Sporocilo:</h3>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <p><span class="podatki">Posiljatelj:</span> {{ sporocilo.posiljatelj }}</p>
+                <p><span class="podatki">Prejemnik:</span> {{ sporocilo.prejemnik }}</p>
+                <p><span class="podatki">Datum in cas objave:</span> {{ sporocilo.datum }}</p>
+            </div>
+            <div class="panel-body">
+                <p><span class="podatki">Sporocilo:</span> {{ sporocilo.sporocilo }}</p>
+            </div>
+        </div>
 
         {% if sporocilo.prejemnik == user.email() %}
             <a class="btn btn-default" href="/odgovori/{{ sporocilo.key.id() }}/"><span class="glyphicon glyphicon-export"></span> Odgovori</a>

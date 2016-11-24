@@ -2,35 +2,33 @@
 
 {% block specifika %}
     <div class="container">
-        <h3 class="col-sm-offset-2 col-sm-10" style="margin-bottom: 20;">Poslji sporocilo:</h3>
-        <form method="post" action="/poslji_sporocilo/" class="form-horizontal form-poslji">
+        <h3 class="col-sm-12" style="margin-bottom: 20;">Poslji sporocilo:</h3>
+        <form method="post" action="/poslji_sporocilo/" class="col-sm-12 form-poslji">
             <div class="form-group">
-                <label class="control-label col-sm-2">Prejemnik:</label>
-                <div class="col-sm-10">
+                <label class="control-label">Prejemnik:</label>
+                <div>
                     <input type="email" name="prejemnik" class="form-control" required="required" placeholder="Vpisi email prejemnika.. (obvezno)">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2">Sporocilo:</label>
-                <div class="col-sm-10">
-                    <textarea rows="3" class="form-control" name="sporocilo" required="required" placeholder="Vpisi sporocilo.. (obvezno)"></textarea>
+                <label class="control-label">Sporocilo:</label>
+                <div>
+                    <textarea rows="3" class="form-control" name="sporocilo" required="required" placeholder="Vpisi sporocilo.."></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-12">
                     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-share"></span> Poslji</button>
+                    <a href="/" class="btn btn-default"><span class="glyphicon glyphicon-step-backward"></span>Nazaj</a>
                 </div>
             </div>
         </form>
         {% if sporocilo %}
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-12">
                 <div class="alert alert-success">
                     <span class="glyphicon glyphicon-ok"></span><strong> Uspesno!</strong> Sporocilo je bilo uspesno poslano.
                 </div>
             </div>
         {% endif %}
-        <div class="col-sm-offset-2 col-sm-10">
-            <a href="/" class="btn btn-default"><span class="glyphicon glyphicon-step-backward"></span>Nazaj</a>
-        </div>
     </div>
 {% endblock specifika %}
